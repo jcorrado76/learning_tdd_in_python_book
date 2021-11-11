@@ -6,7 +6,7 @@ class Dollar:
         self.amount = amount
 
     def times(self, multiplier: float):
-        return Dollar(10)
+        return Dollar(self.amount * multiplier)
 
 
 class TestMoney(unittest.TestCase):
@@ -14,6 +14,7 @@ class TestMoney(unittest.TestCase):
         fiver = Dollar(5)
         tenner = fiver.times(2)
         self.assertEqual(10, tenner.amount)
+
 
 if __name__ == "__main__":
     unittest.main()
