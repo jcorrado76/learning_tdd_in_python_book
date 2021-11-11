@@ -1,42 +1,10 @@
 import unittest
-
-
-class Money:
-    def __init__(self, amount: float, currency: str):
-        self.amount = amount
-        self.currency = currency
-
-    def times(self, multiplier: float):
-        return Money(self.amount * multiplier, self.currency)
-
-    def divide(self, divisor: float):
-        return Money(self.amount / divisor, self.currency)
-
-    def __eq__(self, other):
-        return self.amount == other.amount and self.currency == other.currency
-
-
-class Portfolio:
-    def __init__(self):
-        self.moneys = []
-
-    def add(self, *moneys):
-        self.moneys.extend(moneys)
-
-    def evaluate(self, currency):
-        total = 0
-        for money in self.moneys:
-            total += money.amount
-        return Money(total, currency)
+from money import Money
+from portfolio import Portfolio
 
 
 class TestMoney(unittest.TestCase):
-    def testMultiplicationInDollars(self):
-        fiveDollars = Money(5, "USD")
-        tenDollars = Money(10, "USD")
-        self.assertEqual(tenDollars, fiveDollars.times(2))
-
-    def testMultiplicationInEuros(self):
+    def test_multiplication(self):
         ten_euros = Money(10, "EUR")
         twenty_euros = ten_euros.times(2)
         self.assertEqual(twenty_euros, Money(20, "EUR"))
