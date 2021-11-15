@@ -59,6 +59,13 @@ class TestMoney(unittest.TestCase):
         ten_euros = Money(10, "EUR")
         self.assertEqual(bank.convert(ten_euros, "USD"), Money(12, "USD"))
 
+    def test_conversion_with_missing_exchange_rate(self):
+        bank = Bank()
+        ten_euros = Money(10, "EUR")
+        # assert that bank.convert raises an exception of type Exception, and a message of "EUR->Kalganid"
+        with self.assertRaisesRegex(Exception, "EUR->Kalganid"):
+            bank.convert(ten_euros, "Kalganid")
+
 
 if __name__ == "__main__":
     unittest.main()

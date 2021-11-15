@@ -17,4 +17,4 @@ class Bank:
             return Money(aMoney.amount * self.exchange_rates[key], aCurrency)
 
         # if you get to here, conversion has failed
-        raise Exception("Failed")
+        raise Exception(key)
