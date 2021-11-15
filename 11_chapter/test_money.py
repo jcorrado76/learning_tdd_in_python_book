@@ -1,6 +1,7 @@
 import unittest
 from money import Money
 from portfolio import Portfolio
+from bank import Bank
 
 
 class TestMoney(unittest.TestCase):
@@ -51,6 +52,12 @@ class TestMoney(unittest.TestCase):
         portfolio.add(one_dollar, one_euro, one_won)
         with self.assertRaisesRegex(Exception, "Missing exchange rate\(s\):\[USD\->Kalganid,EUR->Kalganid,KRW->Kalganid]"):
             portfolio.evaluate("Kalganid")
+
+    def test_conversion(self):
+        bank = Bank()
+        bank.add_exchange_rate("EUR", "USD", 1.2)
+        ten_euros = Money(10, "EUR")
+        self.assertEqual(bank.convert(ten_euros, "USD"), Money(12, "USD"))
 
 
 if __name__ == "__main__":
