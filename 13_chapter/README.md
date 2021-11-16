@@ -12,6 +12,7 @@ This is going to be the work for chapter 13 of the **Learning Test Driven Develo
 * Improve error handling when exchange rates are unspecified - Done in chapter 10
 * Improve the implementation of exchange rates - Done in chapter 11
 * Allow exchange rates to be modified - Done in chapter 12
+* Continuously integrate our code
 
 In this chapter, we're going to use GitHub actions to implement the CI portion of a CI/CD pipeline for our code.
 

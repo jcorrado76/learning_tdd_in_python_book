@@ -12,4 +12,6 @@ This is going to be the work for chapter 12 of the **Learning Test Driven Develo
 * Improve error handling when exchange rates are unspecified - Done in chapter 10
 * Improve the implementation of exchange rates - Done in chapter 11
 * Allow exchange rates to be modified
+* Continuously integrate our code
 
+In the next chapter, we'll look how to use continuous integration with our code using GitHub actions
