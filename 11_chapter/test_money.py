@@ -5,6 +5,11 @@ from bank import Bank
 
 
 class TestMoney(unittest.TestCase):
+    def setUp(self) -> None:
+        self.bank = Bank()
+        self.bank.add_exchange_rate("EUR", "USD", 1.2)
+        self.bank.add_exchange_rate("USD", "KRW", 1100)
+
     def test_multiplication(self):
         ten_euros = Money(10, "EUR")
         twenty_euros = ten_euros.times(2)
@@ -24,7 +29,7 @@ class TestMoney(unittest.TestCase):
         fifteenDollars = Money(15, "USD")
         portfolio = Portfolio()
         portfolio.add(fiveDollars, tenDollars)
-        self.assertEqual(fifteenDollars, portfolio.evaluate("USD"))
+        self.assertEqual(fifteenDollars, portfolio.evaluate(self.bank, "USD"))
 
     def test_adding_dollars_and_euros(self):
         five_dollars = Money(5, "USD")
@@ -32,7 +37,7 @@ class TestMoney(unittest.TestCase):
         portfolio = Portfolio()
         portfolio.add(five_dollars, ten_euros)
         expected_value = Money(17, "USD")
-        actual_value = portfolio.evaluate("USD")
+        actual_value = portfolio.evaluate(self.bank, "USD")
         self.assertEqual(expected_value, actual_value, f"{expected_value} != {actual_value}")
 
     def test_addition_of_dollars_and_wons(self):
@@ -41,7 +46,7 @@ class TestMoney(unittest.TestCase):
         portfolio = Portfolio()
         portfolio.add(one_dollar, eleven_hundred_won)
         expected_value = Money(2200, "KRW")
-        actual_value = portfolio.evaluate("KRW")
+        actual_value = portfolio.evaluate(self.bank, "KRW")
         self.assertEqual(expected_value, actual_value, f"{expected_value} != {actual_value}")
 
     def test_addition_with_multiple_missing_exchange_rates(self):
@@ -51,7 +56,7 @@ class TestMoney(unittest.TestCase):
         portfolio = Portfolio()
         portfolio.add(one_dollar, one_euro, one_won)
         with self.assertRaisesRegex(Exception, "Missing exchange rate\(s\):\[USD\->Kalganid,EUR->Kalganid,KRW->Kalganid]"):
-            portfolio.evaluate("Kalganid")
+            portfolio.evaluate(self.bank, "Kalganid")
 
     def test_conversion(self):
         bank = Bank()
