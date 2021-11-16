@@ -13,3 +13,11 @@ This is going to be the work for chapter 13 of the **Learning Test Driven Develo
 * Improve the implementation of exchange rates - Done in chapter 11
 * Allow exchange rates to be modified - Done in chapter 12
 
+In this chapter, we're going to use GitHub actions to implement the CI portion of a CI/CD pipeline for our code.
+
+We first create a folder:
+```bash
+mkdir -p .github/workflows
+```
+
+And then we place a YAML file specifying the steps to take when the CI pipeline fires off.
